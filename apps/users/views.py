@@ -2,7 +2,7 @@ from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 
 from apps.users.models import User 
-from apps.users.serializers import UserSerializer, RegisterSerializer
+from apps.users.serializers import UserSerializer, UserDetailSerializer, RegisterSerializer
 
 # Create your views here.
 class UserAPIViewSet(GenericViewSet,
@@ -17,4 +17,6 @@ class UserAPIViewSet(GenericViewSet,
     def get_serializer_class(self):
         if self.action in ('create', ):
             return RegisterSerializer
+        if self.action in ('retrieve', ):
+            return UserDetailSerializer
         return UserSerializer

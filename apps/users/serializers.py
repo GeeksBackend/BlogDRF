@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from apps.users.models import User 
+from apps.posts.serializers import PostSerializer
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -8,6 +9,14 @@ class UserSerializer(serializers.ModelSerializer):
         model = User 
         fields = ('id',  'username', 'first_name', 
                   'last_name', 'email', 'profile_image', 'bio')
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    user_posts = PostSerializer(read_only=True, many=True)
+    class Meta:
+        model = User 
+        fields = ('id',  'username', 'first_name', 
+                  'last_name', 'email', 'profile_image', 
+                  'bio', 'user_posts')
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
