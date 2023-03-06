@@ -8,8 +8,8 @@ router = DefaultRouter()
 router.register('users', UserAPIViewSet, basename="users")
 
 urlpatterns = [
-    path('api/login/', TokenObtainPairView.as_view(), name = "api_login"),
-    path('api/refresh/', TokenRefreshView.as_view(), name = "api_refresh")
+    path('login/', TokenObtainPairView.as_view(), name = "api_login"),
+    path('refresh/', TokenRefreshView.as_view(), name = "api_refresh")
 ]
 
 urlpatterns += router.urls

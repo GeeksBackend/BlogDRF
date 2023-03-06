@@ -1,8 +1,10 @@
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from apps.users.models import User 
 from apps.users.serializers import UserSerializer, UserDetailSerializer, RegisterSerializer
+from apps.users.permissions import UserPermission
 
 # Create your views here.
 class UserAPIViewSet(GenericViewSet,
@@ -13,6 +15,7 @@ class UserAPIViewSet(GenericViewSet,
                      mixins.DestroyModelMixin):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (UserPermission, )
 
     def get_serializer_class(self):
         if self.action in ('create', ):
