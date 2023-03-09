@@ -27,7 +27,7 @@ class Post(models.Model):
     )
 
     def __str__(self):
-        return f"User: {self.user}, Title: {self.title} - {self.created}"
+        return f"{self.title}"
     
     class Meta:
         verbose_name = "Пост"
